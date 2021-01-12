@@ -6,7 +6,6 @@
 package bacltt.controllers;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,15 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Thúy Bắc
  */
-public class MainController extends HttpServlet {
-    public static final String ERROR="error.jsp";
-    public static final String LOGIN="LoginController";
-    public static final String LOGOUT="LogoutController";
-    public static final String GETPRODUCT="ProductController";
-    public static final String LINK_LOGIN="login.jsp";
-    public static final String HOME_PAGE="BackToHomeController";
-    public static final String CREATE_FOOD_PAGE="create_page.jsp";
-    public static final String CREATE_FOOD="CreateFoodController";
+public class BackToHomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,31 +29,12 @@ public class MainController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String action = request.getParameter("action");
-            if("getProduct".equals(action)){
-                url = GETPRODUCT;
-            } else if("getLinkLogin".equals(action)){
-                url = LINK_LOGIN;
-            } else if("homePage".equals(action)){
-                url = HOME_PAGE;
-            } else if("Login".equals(action)){
-                url =  LOGIN;
-            } else if("Logout".equals(action)){
-                url =  LOGOUT;
-            } else if("createFood".equals(action)){
-                url =  CREATE_FOOD_PAGE;
-            } else if("Create_Product".equals(action)){
-                url =  CREATE_FOOD;
-            }
             
         } catch (Exception e) {
-            log("ERROR at MainController: " + e.getMessage());
         } finally {
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect("index.jsp");
         }
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

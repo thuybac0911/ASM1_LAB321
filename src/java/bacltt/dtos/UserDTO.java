@@ -22,7 +22,12 @@ public class UserDTO implements Serializable{
 
     public UserDTO() {
     }
-
+    public UserDTO(String userID, String passwword, String fullname,String roleID){
+        this.userID = userID;
+        this.passwword = passwword;
+        this.fullname = fullname;
+        this.roleID = roleID;
+    }
     public UserDTO(String userID, String passwword, String fullname, String address, String phone, String email, String roleID) {
         this.userID = userID;
         this.passwword = passwword;

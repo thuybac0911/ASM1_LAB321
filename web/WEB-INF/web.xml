@@ -8,6 +8,22 @@
         <servlet-name>MainController</servlet-name>
         <servlet-class>bacltt.controllers.MainController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BackToHomeController</servlet-name>
+        <servlet-class>bacltt.controllers.BackToHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>bacltt.controllers.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>bacltt.controllers.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateFoodController</servlet-name>
+        <servlet-class>bacltt.controllers.CreateFoodController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FirstController</servlet-name>
         <url-pattern>/FirstController</url-pattern>
@@ -15,6 +31,22 @@
     <servlet-mapping>
         <servlet-name>MainController</servlet-name>
         <url-pattern>/MainController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BackToHomeController</servlet-name>
+        <url-pattern>/BackToHomeController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateFoodController</servlet-name>
+        <url-pattern>/CreateFoodController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -14,7 +14,11 @@
     </head>
     <body>
         <h1>HANA SHOP</h1>
-        <a href="login.jsp">Login</a>
+        <c:url value="MainController" var="linkLogin">
+            <c:param name="action" value="getLinkLogin"/>
+        </c:url>
+        <a href="${linkLogin}">Login</a>
+            
         <a href="search.jsp">Search Product</a>
         <h3>Categories</h3>
         <c:forEach items="${applicationScope.LIST_CATE}" var="cateDTO" varStatus="counter">

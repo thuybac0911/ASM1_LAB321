@@ -20,13 +20,13 @@ public class ProductDTO implements Serializable{
     private String description;
     private String image;
     private Date createDate;
-    private boolean isDeleted;
+    private int isDeleted;
     private String cateID;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(String productID, String productName, float price, int quantity, String description, String image, Date createDate, boolean isDeleted, String cateID) {
+    public ProductDTO(String productID, String productName, float price, int quantity, String description, String image, Date createDate, int isDeleted, String cateID) {
         this.productID = productID;
         this.productName = productName;
         this.price = price;
@@ -94,11 +94,11 @@ public class ProductDTO implements Serializable{
         this.createDate = createDate;
     }
 
-    public boolean isIsDeleted() {
+    public int isIsDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
+    public void setIsDeleted(int isDeleted) {
         this.isDeleted = isDeleted;
     }
 
