@@ -42,8 +42,8 @@
                     <option>Candies</option>
                     </select>
             <br/>
-            <input type="submit" name="action" value="Create_Product" />
+            <input type="submit" name="action" value="Create Food" />
         </form>
-        
+            <a href="admin_page.jsp">Back To ADMIN Page</a>
     </body>
 </html>

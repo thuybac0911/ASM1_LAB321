@@ -52,12 +52,12 @@ public class LoginController extends HttpServlet {
                     url = ADMIN_PAGE;
                 }else if(USER.equals(role)){
                     url = USER_PAGE;
-                }
+                }                  
             }
         } catch (Exception e) {
             log("ERROR at LoginController:" + e.getMessage());
         } finally{
-            request.getRequestDispatcher(url).forward(request, response);
+            response.sendRedirect(url);
         }
         
     }

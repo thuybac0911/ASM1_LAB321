@@ -24,6 +24,18 @@
         <servlet-name>CreateFoodController</servlet-name>
         <servlet-class>bacltt.controllers.CreateFoodController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllProductController</servlet-name>
+        <servlet-class>bacltt.controllers.GetAllProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchController</servlet-name>
+        <servlet-class>bacltt.controllers.SearchController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteController</servlet-name>
+        <servlet-class>bacltt.controllers.DeleteController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FirstController</servlet-name>
         <url-pattern>/FirstController</url-pattern>
@@ -47,6 +59,18 @@
     <servlet-mapping>
         <servlet-name>CreateFoodController</servlet-name>
         <url-pattern>/CreateFoodController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllProductController</servlet-name>
+        <url-pattern>/GetAllProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchController</servlet-name>
+        <url-pattern>/SearchController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteController</servlet-name>
+        <url-pattern>/DeleteController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

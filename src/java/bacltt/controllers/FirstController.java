@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author Thúy Bắc
  */
 public class FirstController extends HttpServlet {
+    private static final String GUEST = "index.jsp";
+    private static final String ADMIN = "admin_page.jsp";
     public void init(){
         try {
         super.init(); //To change body of generated methods, choose Tools | Templates.
@@ -47,12 +49,18 @@ public class FirstController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url ="";
         try {
-            
+            String roleID = request.getParameter("txtRoleID");
+            if(roleID == null ){
+                url = GUEST;
+            } else if ("AD".equals(roleID)) {
+                url = ADMIN;
+            }
         } catch (Exception e) {
             log("ERROR at FirstController: " + e.getMessage());
         } finally{
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
