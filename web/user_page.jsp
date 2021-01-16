@@ -47,10 +47,12 @@
                                 <th>Create Date</th>
                                 <th>Category</th>
                                 <th>Image</th>
+                                <th>Add to cart</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:forEach var="list" varStatus="counter" items="${sessionScope.SEARCH_LIST_FOOD}">
+                            <form action="MainController">
                                 <tr>
                                     <td>${counter.count}</td>
                                     <td>${list.productName}</td>
@@ -61,8 +63,15 @@
                                     <td>
                                         <img src="${list.image}"/>
                                     </td>
+                                    <td>
+                                        <input type="submit" name="action" value="Add To Cart" />
+                                        <input type="hidden" name="txtProductID" value="${list.productID}"/>
+                                        <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
+                                    </td>
                                 </tr>
+                            </form>
                             </c:forEach>
+                            <h2><a href="viewCart.jsp">View Your Cart</a></h2>
                         </tbody>
                 </table>
                 </c:if>

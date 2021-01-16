@@ -207,6 +207,31 @@ public class ProductDAO implements Serializable{
         }
         return list;
     }
+        public ProductDTO findByPrimaryKey(String id) throws Exception{
+        ProductDTO product = null;
+        try {
+            conn = DBUtil.getConnection();
+            String sql ="SELECT ProductID,ProductName,Price,Quantity,Description,Image "
+                    + "FROM tblProducts   "
+                    + "WHERE  ProductID = ?";
+            stm=conn.prepareStatement(sql);
+            stm.setString(1, id);
+            rs=stm.executeQuery();
+            if(rs.next()){
+                String name = rs.getString("ProductName");
+                float price = rs.getFloat("Price");
+                int quantity = rs.getInt("Quantity");
+                String description = rs.getString("Description");
+                String image = rs.getString("Image");
+                product = new ProductDTO(id, name, price, quantity, description, image);
+                product.setQuantity(quantity);
+            }
+
+        } finally {
+            closeConnection();
+        }
+        return product;
+    }
     public boolean insert(ProductDTO product) throws SQLException, ClassNotFoundException{
         boolean check = false;
         try {
@@ -245,5 +270,25 @@ public class ProductDAO implements Serializable{
         } finally {
             closeConnection();
         }
+    }
+    public int getQuantity(String productID) throws SQLException, ClassNotFoundException{
+        int result = 0;
+        try {
+            conn = DBUtil.getConnection();
+            if(conn!=null){
+                String sql = "SELECT Quantity "
+                        + "FROM tblProducts "
+                        + "WHERE ProductID = ? ";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, productID);
+                rs = stm.executeQuery();
+                if(rs.next()){
+                    result = rs.getInt("Quantity");
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
     }
 }

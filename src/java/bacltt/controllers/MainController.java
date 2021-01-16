@@ -29,6 +29,12 @@ public class MainController extends HttpServlet {
     public static final String EDIT="update_page.jsp";
     public static final String UPDATE="UpdateController";
     public static final String DELETE="DeleteController";
+    
+    //shopping cart
+    public static final String ADD_TO_CART = "AddToCartController";
+    public static final String UPDATE_CART = "UpdateCartController";
+    public static final String REMOVE_FROM_CART = "RemoveCartController";
+    public static final String ORDER = "OrderController";
 
 
     /**
@@ -68,8 +74,15 @@ public class MainController extends HttpServlet {
                 url = UPDATE;
             } else if("Delete".equals(action)){
                 url = DELETE;
-            }
-            
+            } else if("Add To Cart".equals(action)){
+                url = ADD_TO_CART;
+            } else if("Update Quantity".equals(action)){
+                url = UPDATE_CART;
+            } else if("Remove Food".equals(action)){
+                url = REMOVE_FROM_CART;
+            } else if("Order".equals(action)){
+                url = ORDER;
+            } 
         } catch (Exception e) {
             log("ERROR at MainController: " + e.getMessage());
         } finally {
