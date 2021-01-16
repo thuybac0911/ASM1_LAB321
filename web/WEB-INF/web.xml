@@ -36,6 +36,10 @@
         <servlet-name>DeleteController</servlet-name>
         <servlet-class>bacltt.controllers.DeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateController</servlet-name>
+        <servlet-class>bacltt.controllers.UpdateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FirstController</servlet-name>
         <url-pattern>/FirstController</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>DeleteController</servlet-name>
         <url-pattern>/DeleteController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateController</servlet-name>
+        <url-pattern>/UpdateController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -29,9 +29,9 @@
                             <option>Candies</option>
                         </select>
             Name: <input type="text" name="txtSearch" value="${param.txtSearch}" /><br/>
-            <%--
+            
             Price: From: <input type="text" name="txtMin" value="${param.txtMin}" />  To: <input type="text" name="txtMax" value="${param.txtMax}"/><br/>
-            --%>
+           
             <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
             <input type="submit" name="action" value="Search" />
             </form>    

@@ -22,11 +22,11 @@
                             <option>Candies</option>
                         </select>
             Name: <input type="text" name="txtSearch" value="${param.txtSearch}" /><br/>
-            <%--
+            
             Price: From: <input type="text" name="txtMin" value="${param.txtMin}" />  To: <input type="text" name="txtMax" value="${param.txtMax}"/><br/>
-            --%>
             <input type="submit" name="action" value="Search" />
             <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
+            
         </form>
     
             <c:if test="${sessionScope.SEARCH_LIST_FOOD !=null}">
@@ -45,6 +45,7 @@
                         </thead>
                         <tbody>
                             <c:forEach var="list" varStatus="counter" items="${sessionScope.SEARCH_LIST_FOOD}">
+                            <form action="MainController">
                                 <tr>
                                     <td>${counter.count}</td>
                                     <td>${list.productName}</td>
@@ -56,6 +57,11 @@
                                         <img src="${list.image}"/>
                                     </td>
                                 </tr>
+                                <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>
+                                <input type="hidden" name="txtMin" value="${param.txtMin}"/>
+                                <input type="hidden" name="txtMax" value="${param.txtMax}"/>
+                            </form>
+                                
                             </c:forEach>
                         </tbody>
                 </table>

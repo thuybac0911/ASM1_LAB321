@@ -12,6 +12,38 @@
         <title>UPDATE Page</title>
     </head>
     <body>
-        
+        <h1>UPDATE PRODUCT</h1>
+        <form action="MainController" method="POST">
+            Food ID: <input type="text" name="txtProductID" value="${param.txtProductID}" readonly="true"/>
+            <font color="red">
+            ${requestScope.ERROR.productIDError}
+            </font><br/>
+            Name: <input type="text" name="txtProductName" value="${param.txtProductName}" required="true"/>
+            <font color="red">
+            ${requestScope.ERROR.productNameError}
+            </font><br/>
+            Price: <input type="text" name="txtPrice" value="${param.txtPrice}" required="true"/>
+            <font color="red">
+            ${requestScope.ERROR.priceError}
+            </font><br/>
+            Quantity: <input type="text" name="txtQuantity" value="${param.txtQuantity}" required="true"/>
+            <font color="red">
+            ${requestScope.ERROR.quantityError}
+            </font><br/>
+            Description: <input type="text" name="txtDescription" value="${param.txtDescription}" required="true"/>
+            <font color="red">
+            ${requestScope.ERROR.descriptionError}
+            </font><br/>
+            Image: <input type="file" name="txtImage" value="${param.txtImage}" required="true"/>
+            <br/>
+            Cate Name: <select name="cboCateID">
+                    <option>Drinks</option>
+                    <option>Cakes</option>
+                    <option>Candies</option>
+                    </select>
+            <br/>
+            <input type="submit" name="action" value="Update" />
+        </form>
+            <a href="admin_page.jsp">Back To ADMIN Page</a>
     </body>
 </html>

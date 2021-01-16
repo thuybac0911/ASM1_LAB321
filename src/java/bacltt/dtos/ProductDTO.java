@@ -118,7 +118,7 @@ public class ProductDTO implements Serializable{
         return cateID;
     }
 
-    public void setCateID(String cateID) {
+    public void setCateName(String cateID) {
         this.cateID = cateID;
     }
     

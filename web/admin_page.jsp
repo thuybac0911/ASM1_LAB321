@@ -66,6 +66,13 @@
                                 <td>${dto.createDate}</td>
                                 <td>
                                     <input type="submit" name="action" value="Edit"/>
+                                    <input type="hidden" name="txtProductID" value="${dto.productID}"/>
+                                    <input type="hidden" name="txtProductName" value="${dto.productName}"/>
+                                    <input type="hidden" name="txtPrice" value="${dto.price}"/>
+                                    <input type="hidden" name="txtQuantity" value="${dto.quantity}"/>
+                                    <input type="hidden" name="txtDescription" value="${dto.description}"/>
+                                    <input type="hidden" name="txtImage" value="${dto.image}"/>
+                                    <input type="hidden" name="cboCateName" value="${dto.cateID}"/>
                                 </td>
                                 <td>
                                     <c:url var="deleteLink" value="MainController">

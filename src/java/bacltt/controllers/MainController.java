@@ -62,9 +62,11 @@ public class MainController extends HttpServlet {
                 url =  CREATE_FOOD;
             } else if("Search".equals(action)){
                 url =  SEARCH;
-            }else if("Update".equals(action)){
+            } else if("Edit".equals(action)){
+                url = EDIT;
+            } else if("Update".equals(action)){
                 url = UPDATE;
-            }else if("Delete".equals(action)){
+            } else if("Delete".equals(action)){
                 url = DELETE;
             }
             

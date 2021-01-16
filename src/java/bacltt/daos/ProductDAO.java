@@ -80,14 +80,115 @@ public class ProductDAO implements Serializable{
                 String sql = "SELECT ProductID,ProductName,Price,Quantity,Description,Image,CreateDate, CateID " 
                             + "FROM tblProducts A " 
                             + "WHERE ProductName LIKE ? AND CateID LIKE ?  " 
-//                            + "AND Price >= ?  AND Price <= ? "
                             + "AND IsDeleted=0 " 
                             + "ORDER BY CreateDate DESC";
                 stm = conn.prepareStatement(sql);
                 stm.setString(1, "%"+productName+"%");
                 stm.setString(2, "%"+cateID+"%");
-//                stm.setString(3, min);
-//                stm.setString(4, max);
+                rs = stm.executeQuery();
+                while(rs.next()){
+                    String productID = rs.getString("ProductID");
+                    productName = rs.getString("ProductName");
+                    String des = rs.getString("Description");
+                    String image = rs.getString("Image");
+                    float price = rs.getFloat("Price");
+                    int quantity = rs.getInt("Quantity");
+                    Date createDate = rs.getDate("CreateDate");
+                    cateID = rs.getString("CateID");
+                    list.add(new ProductDTO(productID, productName, price, quantity, des, image, createDate, 0, cateID));
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return list;
+    }
+    //search all
+        public List<ProductDTO> getListAllProduct(String productName,String cateID,String min,String max) throws SQLException, ClassNotFoundException{
+        List<ProductDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            if(conn!=null){
+                String sql = "SELECT ProductID,ProductName,Price,Quantity,Description,Image,CreateDate, CateID " 
+                            + "FROM tblProducts A " 
+                            + "WHERE ProductName LIKE ? AND CateID LIKE ?  " 
+                            + "AND Price >= ?  AND Price <= ? "
+                            + "AND IsDeleted=0 " 
+                            + "ORDER BY CreateDate DESC";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%"+productName+"%");
+                stm.setString(2, "%"+cateID+"%");
+                stm.setString(3, min);
+                stm.setString(4, max);
+                rs = stm.executeQuery();
+                while(rs.next()){
+                    String productID = rs.getString("ProductID");
+                    productName = rs.getString("ProductName");
+                    String des = rs.getString("Description");
+                    String image = rs.getString("Image");
+                    float price = rs.getFloat("Price");
+                    int quantity = rs.getInt("Quantity");
+                    Date createDate = rs.getDate("CreateDate");
+                    cateID = rs.getString("CateID");
+                    list.add(new ProductDTO(productID, productName, price, quantity, des, image, createDate, 0, cateID));
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return list;
+    }
+    //search <= max
+    
+        public List<ProductDTO> getListMaxProduct(String productName,String cateID,String max) throws SQLException, ClassNotFoundException{
+        List<ProductDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            if(conn!=null){
+                String sql = "SELECT ProductID,ProductName,Price,Quantity,Description,Image,CreateDate, CateID " 
+                            + "FROM tblProducts A " 
+                            + "WHERE ProductName LIKE ? AND CateID LIKE ?  " 
+                            + "AND Price <= ? "
+                            + "AND IsDeleted=0 " 
+                            + "ORDER BY CreateDate DESC";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%"+productName+"%");
+                stm.setString(2, "%"+cateID+"%");
+                stm.setString(3, max);
+                rs = stm.executeQuery();
+                while(rs.next()){
+                    String productID = rs.getString("ProductID");
+                    productName = rs.getString("ProductName");
+                    String des = rs.getString("Description");
+                    String image = rs.getString("Image");
+                    float price = rs.getFloat("Price");
+                    int quantity = rs.getInt("Quantity");
+                    Date createDate = rs.getDate("CreateDate");
+                    cateID = rs.getString("CateID");
+                    list.add(new ProductDTO(productID, productName, price, quantity, des, image, createDate, 0, cateID));
+                }
+            }
+        } finally {
+            closeConnection();
+        }
+        return list;
+    }
+    //search >= min    
+        public List<ProductDTO> getListMinProduct(String productName,String cateID,String min) throws SQLException, ClassNotFoundException{
+        List<ProductDTO> list = new ArrayList<>();
+        try {
+            conn = DBUtil.getConnection();
+            if(conn!=null){
+                String sql = "SELECT ProductID,ProductName,Price,Quantity,Description,Image,CreateDate, CateID " 
+                            + "FROM tblProducts A " 
+                            + "WHERE ProductName LIKE ? AND CateID LIKE ?  " 
+                            + "AND Price >= ? "
+                            + "AND IsDeleted=0 " 
+                            + "ORDER BY CreateDate DESC";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, "%"+productName+"%");
+                stm.setString(2, "%"+cateID+"%");
+                stm.setString(3, min);
                 rs = stm.executeQuery();
                 while(rs.next()){
                     String productID = rs.getString("ProductID");

@@ -5,15 +5,10 @@
  */
 package bacltt.controllers;
 
-import bacltt.daos.CateDAO;
 import bacltt.daos.ProductDAO;
-import bacltt.dtos.CateDTO;
 import bacltt.dtos.ProductDTO;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +42,8 @@ public class SearchController extends HttpServlet {
             String cateName = request.getParameter("cboCateName");
             String productName = request.getParameter("txtSearch");
             String roleID  = request.getParameter("txtRoleID");
-//            String min = request.getParameter("txtMin");
-//            String max = request.getParameter("txtMax");
+            String min = request.getParameter("txtMin");
+            String max = request.getParameter("txtMax");
             String cateID = "";
             if("Drinks".equals(cateName)){
                 cateID = "C01";
@@ -60,7 +55,16 @@ public class SearchController extends HttpServlet {
                 cateID = "C03";
             }
             ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list = dao.getListProduct(productName, cateID);
+            List<ProductDTO> list;
+            if(min.isEmpty() && max.isEmpty() ){
+                list = dao.getListProduct(productName, cateID);
+            } else if (min.isEmpty()){
+                list = dao.getListMaxProduct(productName, cateID, max);
+            } else if (max.isEmpty()){
+                list = dao.getListMinProduct(productName, cateID, min);
+            } else {
+                list = dao.getListAllProduct(productName, cateID, min, max);
+            }
             HttpSession session = request.getSession();
             session.setAttribute("SEARCH_LIST_FOOD", list);
             if(roleID == null ){
