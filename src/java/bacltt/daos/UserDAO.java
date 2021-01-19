@@ -60,4 +60,53 @@ public class UserDAO implements Serializable{
         }
         return user;
     }
+    
+    public UserDTO checkLoginGG(String userid) throws SQLException {
+        UserDTO result = null;
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+
+                String sql = "SELECT Fullname,RoleID,Email,Address "
+                        + "FROM tblUsers "
+                        + "WHERE userID=?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, userid);
+                rs = stm.executeQuery();
+                if (rs.next()) {
+                    String fullname = rs.getString("Fullname");
+                    String roleid = rs.getString("RoleID");
+                    String email = rs.getString("Email");
+                    result = new UserDTO(userid, fullname, roleid, email,"");
+                }
+
+            }
+        } catch (Exception e) {
+        } finally {
+            closeConnection();
+
+        }
+        return result;
+    }
+    
+    public void createUserGG(UserDTO user) throws SQLException {
+        try {
+            conn = DBUtil.getConnection();
+            if (conn != null) {
+
+                String sql = "INSERT INTO tblUsers(Fullname,userID,roleID,email) VALUES(?,?,?,?)";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, user.getFullname());
+                stm.setString(2, user.getUserID());
+                stm.setString(3, user.getRoleID());
+                stm.setString(4, user.getEmail());
+                stm.executeUpdate();
+
+            }
+        } catch (Exception e) {
+        } finally {
+            closeConnection();
+        }
+
+    }
 }

@@ -61,7 +61,7 @@
                                 <td>${dto.quantity}</td>
                                 <td>${dto.description}</td>
                                 <td>
-                                    <img src="${dto.image}"/>
+                                    <img src="${dto.image}" height="150" width="150"/>
                                 </td>
                                 <td>${dto.createDate}</td>
                                 <td>
@@ -73,6 +73,7 @@
                                     <input type="hidden" name="txtDescription" value="${dto.description}"/>
                                     <input type="hidden" name="txtImage" value="${dto.image}"/>
                                     <input type="hidden" name="cboCateName" value="${dto.cateID}"/>
+                                    <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
                                 </td>
                                 <td>
                                     <c:url var="deleteLink" value="MainController">
@@ -81,10 +82,11 @@
                                         <c:param name="cateName" value="${cateDTO.cateName}"/>
                                         <c:param name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
                                     </c:url>
-                                    <a href="${deleteLink}">Delete</a>
+                                    <a href="${deleteLink}" onclick="return confirm('Are you sure to Delete!')">Delete</a>
                                 </td>
                             </form>
                         </tr>
+                        
                     </c:forEach>
                 </tbody>
             </table>

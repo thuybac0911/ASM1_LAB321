@@ -60,7 +60,7 @@
                         <td></td>
                         <td></td>
                         <td>
-                            <input type="submit" name="action" value="Remove Food" />
+                            <input type="submit" name="action" value="Remove Food" onclick="return confirm('Are you sure to Delete!')" />
                         </td>
                     </tr>
                 </tbody>

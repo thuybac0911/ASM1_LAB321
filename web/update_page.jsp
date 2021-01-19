@@ -4,6 +4,7 @@
     Author     : Thúy Bắc
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,17 +15,17 @@
     <body>
         <h1>UPDATE PRODUCT</h1>
         <form action="MainController" method="POST">
+            
+            <br/>
             Food ID: <input type="text" name="txtProductID" value="${param.txtProductID}" readonly="true"/>
-            <font color="red">
-            ${requestScope.ERROR.productIDError}
-            </font><br/>
+            <br/>
             Name: <input type="text" name="txtProductName" value="${param.txtProductName}" required="true"/>
             <font color="red">
             ${requestScope.ERROR.productNameError}
             </font><br/>
             Price: <input type="text" name="txtPrice" value="${param.txtPrice}" required="true"/>
             <font color="red">
-            ${requestScope.ERROR.priceError}
+            ${requestScope.ERROR1.priceError}
             </font><br/>
             Quantity: <input type="text" name="txtQuantity" value="${param.txtQuantity}" required="true"/>
             <font color="red">
@@ -34,14 +35,14 @@
             <font color="red">
             ${requestScope.ERROR.descriptionError}
             </font><br/>
-            Image: <input type="file" name="txtImage" value="${param.txtImage}" required="true"/>
-            <br/>
+            Image: <input type="file" name="txtImage" value="${param.txtImage}"/><br/>
             Cate Name: <select name="cboCateID">
                     <option>Drinks</option>
                     <option>Cakes</option>
                     <option>Candies</option>
                     </select>
             <br/>
+            <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
             <input type="submit" name="action" value="Update" />
         </form>
             <a href="admin_page.jsp">Back To ADMIN Page</a>

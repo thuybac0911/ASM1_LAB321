@@ -44,7 +44,7 @@ public class RemoveCartController extends HttpServlet {
         } catch (Exception e) {
             log("ERROR at RemoveController: " +e.getMessage());
         }finally{
-            response.sendRedirect("viewCart.jsp");
+            response.sendRedirect("UpdateCartController");
         }
     }
 

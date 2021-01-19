@@ -56,6 +56,18 @@
         <servlet-name>OrderController</servlet-name>
         <servlet-class>bacltt.controllers.OrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <servlet-class>bacltt.controllers.LoginGoogleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewHistoryController</servlet-name>
+        <servlet-class>bacltt.controllers.ViewHistoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailsHistoryController</servlet-name>
+        <servlet-class>bacltt.controllers.ViewDetailsHistoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>FirstController</servlet-name>
         <url-pattern>/FirstController</url-pattern>
@@ -111,6 +123,18 @@
     <servlet-mapping>
         <servlet-name>OrderController</servlet-name>
         <url-pattern>/OrderController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginGoogleController</servlet-name>
+        <url-pattern>/LoginGoogleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewHistoryController</servlet-name>
+        <url-pattern>/ViewHistoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailsHistoryController</servlet-name>
+        <url-pattern>/ViewDetailsHistoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

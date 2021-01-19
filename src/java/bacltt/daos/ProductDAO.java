@@ -291,4 +291,26 @@ public class ProductDAO implements Serializable{
         }
         return result;
     }
+    public boolean updateProduct(ProductDTO product) throws SQLException, ClassNotFoundException{
+        boolean check = false;
+        try {
+            conn = DBUtil.getConnection();
+            if(conn!=null){
+                String sql = "UPDATE tblProducts SET ProductName=? , Price = ? , Quantity = ? ,Description = ?, Image = ? ,CateID = ? "
+                        + "WHERE ProductID = ?";
+                stm = conn.prepareStatement(sql);
+                stm.setString(1, product.getProductName());
+                stm.setFloat(2,product.getPrice());
+                stm.setInt(3, product.getQuantity());
+                stm.setString(4, product.getDescription());
+                stm.setString(5, product.getImage());
+                stm.setString(6, product.getCateID());
+                stm.setString(7, product.getProductID());
+               check = stm.executeUpdate() !=0 ? true:false;
+            }
+        } finally {
+            closeConnection();
+        }
+        return check;
+    }
 }

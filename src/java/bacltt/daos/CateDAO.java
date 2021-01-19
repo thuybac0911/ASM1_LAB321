@@ -20,15 +20,15 @@ import java.util.List;
  */
 public class CateDAO implements Serializable{
     private Connection conn;
-    private PreparedStatement preStm;
+    private PreparedStatement stm;
     private ResultSet rs;
     
     private void closeConnection()  throws Exception{
         if (rs != null) {
                 rs.close();
             }
-            if (preStm != null) {
-                preStm.close();
+            if (stm != null) {
+                stm.close();
             }
             if (rs != null) {
                 rs.close();
@@ -46,8 +46,8 @@ public class CateDAO implements Serializable{
             String sql = "SELECT CateID,CateName "
                     + "FROM tblCategories";
             conn = DBUtil.getConnection();
-            preStm = conn.prepareStatement(sql);
-            rs = preStm.executeQuery();
+            stm = conn.prepareStatement(sql);
+            rs = stm.executeQuery();
             result= new ArrayList<>();
             while(rs.next()){
                 id = rs.getString("CateID");

@@ -13,14 +13,19 @@
         <title>USER Page</title>
     </head>
     <body>
-        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID != 'US'}">
+        <c:if test="${sessionScope.LOGIN_USER == null or sessionScope.LOGIN_USER.roleID == 'AD'}">
             <c:redirect url="login.jsp"></c:redirect>
         </c:if>
+
         <h1>Welcome ${sessionScope.LOGIN_USER.fullname}</h1>
         <c:url var="logout" value="MainController" >
             <c:param name="action" value="Logout" ></c:param>
         </c:url>
         <a href="${logout}">Logout</a><br/>
+        <c:url var="history" value="MainController">
+            <c:param name="action" value="ViewHistory"></c:param>
+        </c:url>
+        <a href="${history}">View History Shopping</a>
         <form action="MainController">
             Categories: <select name="cboCateName" >
                             <option></option>
@@ -61,7 +66,7 @@
                                     <td>${list.createDate}</td>
                                     <td>${list.cateID}</td>
                                     <td>
-                                        <img src="${list.image}"/>
+                                        <img src="${list.image}" height="150" width="150"/>
                                     </td>
                                     <td>
                                         <input type="submit" name="action" value="Add To Cart" />

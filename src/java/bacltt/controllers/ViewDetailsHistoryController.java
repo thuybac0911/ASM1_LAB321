@@ -5,8 +5,8 @@
  */
 package bacltt.controllers;
 
-import bacltt.daos.ProductDAO;
-import bacltt.dtos.ProductDTO;
+import bacltt.daos.OrderDAO;
+import bacltt.dtos.OrderDetailDTO;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,11 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Thúy Bắc
  */
-public class SearchController extends HttpServlet {
-    private static final String ERROR = "search.jsp";
-    private static final String GUEST = "search.jsp";
-    private static final String USER = "user_page.jsp";
-    
+public class ViewDetailsHistoryController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,45 +33,16 @@ public class SearchController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
         try {
-            String cateName = request.getParameter("cboCateName");
-            String productName = request.getParameter("txtSearch");
-            String roleID  = request.getParameter("txtRoleID");
-            String min = request.getParameter("txtMin");
-            String max = request.getParameter("txtMax");
-            String cateID = "";
-            if("Drinks".equals(cateName)){
-                cateID = "C01";
-            }
-            if("Cakes".equals(cateName)){
-                cateID = "C02";
-            }
-            if("Candies".equals(cateName)){
-                cateID = "C03";
-            }
-            ProductDAO dao = new ProductDAO();
-            List<ProductDTO> list;
-            if(min.isEmpty() && max.isEmpty() ){
-                list = dao.getListProduct(productName, cateID);
-            } else if (min.isEmpty()){
-                list = dao.getListMaxProduct(productName, cateID, max);
-            } else if (max.isEmpty()){
-                list = dao.getListMinProduct(productName, cateID, min);
-            } else {
-                list = dao.getListAllProduct(productName, cateID, min, max);
-            }
+            String orderID = request.getParameter("txtOrderID");
+            OrderDAO dao = new OrderDAO();
+            List<OrderDetailDTO> list = dao.getListOrderDetails(orderID);
             HttpSession session = request.getSession();
-            session.setAttribute("SEARCH_LIST_FOOD", list);
-            if(roleID == null ){
-                url = GUEST;
-            } else if ("US".equals(roleID) || "USG".equals(roleID)){
-                url = USER;
-            }
+            session.setAttribute("LIST_ORDER_DETAIL", list);
         } catch (Exception e) {
-            log("ERROR at SearchController: "+ e.getMessage());
-        }finally{
-            response.sendRedirect(url);
+            log("ERROR at ViewDetailsHistoryController: "+e.getMessage());
+        } finally{
+            request.getRequestDispatcher("viewDetailHistory.jsp").forward(request, response);
         }
     }
 

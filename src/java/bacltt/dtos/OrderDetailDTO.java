@@ -17,6 +17,8 @@ public class OrderDetailDTO implements Serializable{
     private String productID;
     private float price;
     private int quantity;
+    private String name ;
+    private String image;
 
     public OrderDetailDTO() {
     }
@@ -27,6 +29,14 @@ public class OrderDetailDTO implements Serializable{
         this.productID = productID;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    public OrderDetailDTO(String orderID, float price, int quantity, String name, String image) {
+        this.orderID = orderID;
+        this.price = price;
+        this.quantity = quantity;
+        this.name = name;
+        this.image = image;
     }
 
     public String getDetailID() {
@@ -68,4 +78,21 @@ public class OrderDetailDTO implements Serializable{
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
 }

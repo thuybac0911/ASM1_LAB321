@@ -7,7 +7,6 @@ package bacltt.daos;
 
 import bacltt.dtos.OrderDTO;
 import bacltt.dtos.OrderDetailDTO;
-import bacltt.dtos.ProductDTO;
 import bacltt.utils.DBUtil;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -15,6 +14,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -114,5 +116,63 @@ public class OrderDAO implements Serializable{
         } finally {
             closeConnection();
         }
+    }
+    
+    public List<OrderDTO> fillAllOrder() throws Exception{
+        List<OrderDTO> result = null;
+        String id, status;
+        Date dayOfCreate;
+        float totalPrice;
+        OrderDTO dto=null;
+        try {
+            String sql = "SELECT OrderID,DateOfCreate,TotalPrice,Status "
+                    + "FROM tblOrders";
+            conn = DBUtil.getConnection();
+            stm = conn.prepareStatement(sql);
+            rs = stm.executeQuery();
+            result= new ArrayList<>();
+            while(rs.next()){
+                id = rs.getString("OrderID");
+                dayOfCreate = rs.getDate("DateOfCreate");
+                totalPrice = rs.getFloat("TotalPrice");
+                status = rs.getString("Status");
+                dto = new OrderDTO(id, dayOfCreate,totalPrice, status);
+                result.add(dto);
+            }
+        } finally {
+            closeConnection();
+        }
+        return result;
+    }
+    
+    public List<OrderDetailDTO> getListOrderDetails(String orderID) throws Exception{
+        List<OrderDetailDTO> result = null;
+        String name,image;
+        float price;
+        int quantity;
+        OrderDetailDTO dto = null;
+        try {
+            String sql ="SELECT P.ProductName,OD.Quantity,OD.Price,P.Image\n" +
+                        "FROM tblOrderDetails OD\n" +
+                        "JOIN tblProducts P\n" +
+                        "ON P.ProductID=OD.ProductID\n" +
+                        "WHERE OrderID=?";
+            conn= DBUtil.getConnection();
+            stm=conn.prepareStatement(sql);
+            stm.setString(1, orderID);
+            rs=stm.executeQuery();
+            result = new ArrayList<>();
+            while(rs.next()){
+                name = rs.getString("ProductName");
+                price = rs.getFloat("Price");
+                quantity = rs.getInt("Quantity");
+                image = rs.getString("Image");
+                dto = new OrderDetailDTO(orderID, price, quantity, name, image);
+                result.add(dto);
+            }
+        }finally{
+            closeConnection();
+        }
+        return result;
     }
 }

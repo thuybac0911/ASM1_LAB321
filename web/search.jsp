@@ -54,7 +54,7 @@
                                     <td>${list.createDate}</td>
                                     <td>${list.cateID}</td>
                                     <td>
-                                        <img src="${list.image}"/>
+                                        <img src="${list.image}" height="150" width="150"/>
                                     </td>
                                 </tr>
                                 <input type="hidden" name="txtSearch" value="${param.txtSearch}"/>

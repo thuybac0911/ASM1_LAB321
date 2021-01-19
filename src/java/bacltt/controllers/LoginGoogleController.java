@@ -1,26 +1,30 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To cnethange this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package bacltt.controllers;
 
-import bacltt.daos.ProductDAO;
-import bacltt.dtos.ProductDTO;
-import bacltt.dtos.ProductErrorDTO;
+import bacltt.daos.UserDAO;
+import bacltt.dtos.UserDTO;
+import bacltt.google.GooglePojo;
+import bacltt.google.GoogleUtils;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Thúy Bắc
  */
-public class UpdateController extends HttpServlet {
-    private final static String SUCCESS = "GetAllProductController";
-    private final static String ERROR = "update_page.jsp";
+public class LoginGoogleController extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+    private static final String ERROR = "login.jsp";
+    private static final String SUCCESS = "user_page.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,56 +38,29 @@ public class UpdateController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        ProductErrorDTO errorPro = new ProductErrorDTO("", "", "", "", "");
         try {
-            String roleID = request.getParameter("txtRoleID");
-            String productID = request.getParameter("txtProductID");
-            String productName = request.getParameter("txtProductName");
-            String price = request.getParameter("txtPrice");
-            String quantity = request.getParameter("txtQuantity");
-            String description = request.getParameter("txtDescription");
-            String image = request.getParameter("txtImage");
-            String cateName = request.getParameter("cboCateID");
-            String cateID="";
-            if("Drinks".equals(cateName)){
-                cateID = "C01";
-            }
-            if("Cakes".equals(cateName)){
-                cateID = "C02";
-            }
-            if("Candies".equals(cateName)){
-                cateID = "C03";
-            }
-            boolean valid=true;
-            if (productName.length() > 100) {
-                valid = false;
-                errorPro.setProductNameError("Food Name in range[1-100]");
-            }
 
-            if (quantity.matches("\\d")) {
-                valid = false;
-                errorPro.setQuantityError("Quantity must be integer number");
-            }
-            if(price.matches("\\w")){
-                valid = false;
-                errorPro.setPriceError("Price must be number");
-            }
-            ProductDAO dao = new ProductDAO();
-            ProductDTO product = new ProductDTO(productID, productName, Float.parseFloat(price), Integer.parseInt(quantity), description, "img/"+image,cateID);
-            boolean check = dao.updateProduct(product);
-            if(valid){
-                if("AD".equals(roleID)){
-                    if(check){
-                        url = SUCCESS; 
-                    }
+            String code = request.getParameter("code");
+            if (code != null || !code.isEmpty()) {
+                UserDAO dao = new UserDAO();
+                HttpSession session = request.getSession();
+                String accessToken = GoogleUtils.getToken(code);
+                GooglePojo gPojo = GoogleUtils.getUserInfo(accessToken);
+                String userID = gPojo.getId();
+                UserDTO user = dao.checkLoginGG(userID);
+                if (user == null) {
+                    String gmail = gPojo.getEmail();
+                    user = new UserDTO(userID, gmail, "USG", gmail, "");
+                    dao.createUserGG(user);
                 }
-            }else{
-                request.setAttribute("ERROR", errorPro);
+                session.setAttribute("LOGIN_USER", user);
+                session.setAttribute("userID", userID);
+                url = SUCCESS;
             }
 
         } catch (Exception e) {
-            log("ERROR at UpdateController: " + e.getMessage());
-        }finally{
+            e.printStackTrace();
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

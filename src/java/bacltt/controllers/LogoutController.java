@@ -18,8 +18,8 @@ import javax.servlet.http.HttpSession;
  * @author Thúy Bắc
  */
 public class LogoutController extends HttpServlet {
-    private final static String LOGOUT = "login.jsp";
-    private final static String ERROR = "login.jsp";
+    private final static String LOGOUT = "index.jsp";
+    private final static String ERROR = "index.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

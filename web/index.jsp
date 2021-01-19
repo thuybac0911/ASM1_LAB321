@@ -17,8 +17,10 @@
         <c:url value="MainController" var="linkLogin">
             <c:param name="action" value="getLinkLogin"/>
         </c:url>
-        <a href="${linkLogin}">Login</a>
-            
+        <a href="${linkLogin}">Login</a><br/>
+        <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8084/Assignment1_BacLTT/LoginGoogleController&response_type=code
+    &client_id=763088501197-d51etv13quvfvquc8esi4i9eliv1mohl.apps.googleusercontent.com">Login With Google</a>  
+        <br/>    
         <a href="search.jsp">Search Product</a>
         <h3>Categories</h3>
         <c:forEach items="${applicationScope.LIST_CATE}" var="cateDTO" varStatus="counter">
@@ -51,7 +53,7 @@
                         <td>${dto.price}</td>
                         <td>${dto.description}</td>
                         <td>
-                            <img src="${dto.image}"/>
+                            <img src="${dto.image}" height="150" width="150"/>
                         </td>
                         </form>
                     </tr>

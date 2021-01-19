@@ -35,6 +35,8 @@ public class MainController extends HttpServlet {
     public static final String UPDATE_CART = "UpdateCartController";
     public static final String REMOVE_FROM_CART = "RemoveCartController";
     public static final String ORDER = "OrderController";
+    public static final String HISTORY = "ViewHistoryController";
+    public static final String DETAILS_HISTORY = "ViewDetailsHistoryController";
 
 
     /**
@@ -82,6 +84,10 @@ public class MainController extends HttpServlet {
                 url = REMOVE_FROM_CART;
             } else if("Order".equals(action)){
                 url = ORDER;
+            } else if("ViewHistory".equals(action)){
+                url = HISTORY;
+            } else if("viewDetails".equals(action)){
+                url = DETAILS_HISTORY;
             } 
         } catch (Exception e) {
             log("ERROR at MainController: " + e.getMessage());
