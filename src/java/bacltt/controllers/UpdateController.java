@@ -5,10 +5,13 @@
  */
 package bacltt.controllers;
 
+import bacltt.daos.LogDAO;
 import bacltt.daos.ProductDAO;
+import bacltt.dtos.LogDTO;
 import bacltt.dtos.ProductDTO;
 import bacltt.dtos.ProductErrorDTO;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -74,6 +77,18 @@ public class UpdateController extends HttpServlet {
             if(valid){
                 if("AD".equals(roleID)){
                     if(check){
+                        String user = request.getParameter("txtUserID");
+                        LogDAO logDao = new LogDAO();
+                        String logID = logDao.getLastLogIDByProductID(productID);
+                        if(logID == null){
+                            logID = "Log-"+productID+"-1";
+                        }else{
+                            String[] tmp = logID.split("-");
+                            int count = Integer.parseInt(tmp[2]);
+                            logID = "Log-"+productID+"-"+(count+1);
+                        }
+                        Date dateAction = new Date();
+                        logDao.insertLog(new LogDTO(logID, productID, user, "Update", "update product", dateAction));
                         url = SUCCESS; 
                     }
                 }

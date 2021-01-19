@@ -5,8 +5,11 @@
  */
 package bacltt.controllers;
 
+import bacltt.daos.LogDAO;
 import bacltt.daos.ProductDAO;
+import bacltt.dtos.LogDTO;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +36,23 @@ public class DeleteController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
+            //logID: Log-productID-countLog
             String id = request.getParameter("txtProductID");
             ProductDAO dao = new ProductDAO();
             dao.deleteProduct(id);
+            
+            String user = request.getParameter("txtUserID");
+            LogDAO logDao = new LogDAO();
+            String logID = logDao.getLastLogIDByProductID(id);
+            if(logID == null){
+                logID = "Log-"+id+"-1";
+            }else{
+                String[] tmp = logID.split("-");
+                int count = Integer.parseInt(tmp[2]);
+                logID = "Log-"+id+"-"+(count+1);
+            }
+            Date dateAction = new Date();
+            logDao.insertLog(new LogDTO(logID, id, user, "Delete", "update status to true", dateAction));
             url = SUCCESS;
         } catch (Exception e) {
             log("ERROR at DeleteController: " + e.getMessage());

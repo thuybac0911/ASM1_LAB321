@@ -25,7 +25,7 @@
             </font><br/>
             Price: <input type="text" name="txtPrice" value="${param.txtPrice}" required="true"/>
             <font color="red">
-            ${requestScope.ERROR1.priceError}
+            ${requestScope.ERROR.priceError}
             </font><br/>
             Quantity: <input type="text" name="txtQuantity" value="${param.txtQuantity}" required="true"/>
             <font color="red">

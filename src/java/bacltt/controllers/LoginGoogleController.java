@@ -41,6 +41,8 @@ public class LoginGoogleController extends HttpServlet {
         try {
 
             String code = request.getParameter("code");
+            
+            System.out.println(code);
             if (code != null || !code.isEmpty()) {
                 UserDAO dao = new UserDAO();
                 HttpSession session = request.getSession();

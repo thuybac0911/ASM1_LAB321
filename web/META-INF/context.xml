@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Assignment1_BacLTT"/>
+<Context path="/Assignment1_BacLTT">
+    <Resource auth="Container" 
+            driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+            name="DBCon"
+            type="javax.sql.DataSource" 
+            url="jdbc:sqlserver://localhost:1433; databaseName=Assignment1_BacLTT;" 
+            username="thuybac" password="123456"/>
+</Context>

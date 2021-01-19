@@ -74,6 +74,7 @@
                                     <input type="hidden" name="txtImage" value="${dto.image}"/>
                                     <input type="hidden" name="cboCateName" value="${dto.cateID}"/>
                                     <input type="hidden" name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
+                                    <input type="hidden" name="txtUserID" value="${sessionScope.LOGIN_USER.userID}"/>
                                 </td>
                                 <td>
                                     <c:url var="deleteLink" value="MainController">
@@ -81,6 +82,7 @@
                                         <c:param name="txtProductID" value="${dto.productID}"></c:param>
                                         <c:param name="cateName" value="${cateDTO.cateName}"/>
                                         <c:param name="txtRoleID" value="${sessionScope.LOGIN_USER.roleID}"/>
+                                        <c:param name="txtUserID" value="${sessionScope.LOGIN_USER.userID}"/>
                                     </c:url>
                                     <a href="${deleteLink}" onclick="return confirm('Are you sure to Delete!')">Delete</a>
                                 </td>

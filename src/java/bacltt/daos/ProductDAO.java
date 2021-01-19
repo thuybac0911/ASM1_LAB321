@@ -16,6 +16,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
@@ -72,7 +73,7 @@ public class ProductDAO implements Serializable{
         return result;
     }
     
-    public List<ProductDTO> getListProduct(String productName,String cateID) throws SQLException, ClassNotFoundException{
+    public List<ProductDTO> getListProduct(String productName,String cateID) throws SQLException, NamingException{
         List<ProductDTO> list = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
@@ -104,7 +105,7 @@ public class ProductDAO implements Serializable{
         return list;
     }
     //search all
-        public List<ProductDTO> getListAllProduct(String productName,String cateID,String min,String max) throws SQLException, ClassNotFoundException{
+        public List<ProductDTO> getListAllProduct(String productName,String cateID,String min,String max) throws SQLException, NamingException{
         List<ProductDTO> list = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
@@ -140,7 +141,7 @@ public class ProductDAO implements Serializable{
     }
     //search <= max
     
-        public List<ProductDTO> getListMaxProduct(String productName,String cateID,String max) throws SQLException, ClassNotFoundException{
+        public List<ProductDTO> getListMaxProduct(String productName,String cateID,String max) throws SQLException, NamingException{
         List<ProductDTO> list = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
@@ -174,7 +175,7 @@ public class ProductDAO implements Serializable{
         return list;
     }
     //search >= min    
-        public List<ProductDTO> getListMinProduct(String productName,String cateID,String min) throws SQLException, ClassNotFoundException{
+        public List<ProductDTO> getListMinProduct(String productName,String cateID,String min) throws SQLException, NamingException{
         List<ProductDTO> list = new ArrayList<>();
         try {
             conn = DBUtil.getConnection();
@@ -232,7 +233,7 @@ public class ProductDAO implements Serializable{
         }
         return product;
     }
-    public boolean insert(ProductDTO product) throws SQLException, ClassNotFoundException{
+    public boolean insert(ProductDTO product) throws SQLException, NamingException{
         boolean check = false;
         try {
             conn = DBUtil.getConnection();
@@ -256,7 +257,7 @@ public class ProductDAO implements Serializable{
         }
         return check;
     }
-    public void deleteProduct(String id) throws SQLException, ClassNotFoundException{
+    public void deleteProduct(String id) throws SQLException, NamingException{
         try {
             conn = DBUtil.getConnection();
             if(conn!=null){
@@ -271,7 +272,7 @@ public class ProductDAO implements Serializable{
             closeConnection();
         }
     }
-    public int getQuantity(String productID) throws SQLException, ClassNotFoundException{
+    public int getQuantity(String productID) throws SQLException, NamingException{
         int result = 0;
         try {
             conn = DBUtil.getConnection();
@@ -291,7 +292,7 @@ public class ProductDAO implements Serializable{
         }
         return result;
     }
-    public boolean updateProduct(ProductDTO product) throws SQLException, ClassNotFoundException{
+    public boolean updateProduct(ProductDTO product) throws SQLException, NamingException{
         boolean check = false;
         try {
             conn = DBUtil.getConnection();

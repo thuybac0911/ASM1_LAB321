@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.naming.NamingException;
 
 /**
  *
@@ -37,7 +38,7 @@ public class UserDAO implements Serializable{
             conn.close();
     }
     
-    public UserDTO checkLogin(String userID,String password) throws ClassNotFoundException, SQLException{
+    public UserDTO checkLogin(String userID,String password) throws SQLException, NamingException{
         UserDTO user = null;
         try {
             conn = DBUtil.getConnection();
@@ -61,7 +62,7 @@ public class UserDAO implements Serializable{
         return user;
     }
     
-    public UserDTO checkLoginGG(String userid) throws SQLException {
+    public UserDTO checkLoginGG(String userid) throws SQLException, NamingException {
         UserDTO result = null;
         try {
             conn = DBUtil.getConnection();
@@ -81,15 +82,14 @@ public class UserDAO implements Serializable{
                 }
 
             }
-        } catch (Exception e) {
-        } finally {
+        }  finally {
             closeConnection();
 
         }
         return result;
     }
     
-    public void createUserGG(UserDTO user) throws SQLException {
+    public void createUserGG(UserDTO user) throws SQLException, NamingException {
         try {
             conn = DBUtil.getConnection();
             if (conn != null) {
@@ -103,8 +103,7 @@ public class UserDAO implements Serializable{
                 stm.executeUpdate();
 
             }
-        } catch (Exception e) {
-        } finally {
+        }  finally {
             closeConnection();
         }
 
